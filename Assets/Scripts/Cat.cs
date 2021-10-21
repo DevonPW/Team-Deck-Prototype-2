@@ -22,12 +22,12 @@ public class Cat : MonoBehaviour
         
     }
 
-    void caughtSprite()
+    public void caughtSprite()
     {
         spriteRendr.sprite = caught;
     }
 
-    void normalSprite()
+    public void normalSprite()
     {
         spriteRendr.sprite = normal;
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class manager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class manager : MonoBehaviour
     public Cat cat;
     public bgScroll bg;
     public mashPrompt mashPrompt;
+
 
     public float escapeTimeLimit = 5;//time player has to escape cat in secs
     public float dragSpeed = 1;//speed player is dragged away by cat
@@ -22,6 +24,8 @@ public class manager : MonoBehaviour
 
     float startEscapeTime;
 
+    float catSpeed = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +37,12 @@ public class manager : MonoBehaviour
     {
         if (isEscaping == true) {
             escaping();
+        }
+        else {
+            cat.transform.Translate(catSpeed * Time.deltaTime, 0, 0);
+            if (cat.transform.position.x >= -4.4f) {
+                player.isHit = true;
+            }
         }
 
 
@@ -56,7 +66,10 @@ public class manager : MonoBehaviour
 
         player.transform.position = new Vector3(-3f, -3.13f);
 
-        cat.transform.position = new Vector3(-7.71f, -3.13f);
+        cat.transform.position = new Vector3(-7.71f, -3.38f);
+
+        cat.caughtSprite();
+        player.caughtSprite();
     }
 
     void escaping()
@@ -72,11 +85,34 @@ public class manager : MonoBehaviour
         cat.transform.Translate(playerTranslation);//cat moves with player
 
         if (player.transform.position.x >= 0) {//player has escaped
-            hasEscaped = true;
+            escaped();
         }
 
         if (Time.time - startEscapeTime >= escapeTimeLimit) {//player has failed
-            hasFailed = true;
+            failed();
         }
+    }
+
+    void escaped()
+    {
+        bg.speed = 9;
+
+        isEscaping = false;
+
+        hasEscaped = false;
+
+        mashPrompt.hide();
+
+        player.transform.position = new Vector3(0, -3.13f);
+
+        cat.transform.position = new Vector3(-8.88f, -3.38f);
+
+        cat.normalSprite();
+        player.normalSprite();
+    }
+
+    void failed()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 }
