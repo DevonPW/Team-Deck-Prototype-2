@@ -5,6 +5,12 @@ using UnityEngine;
 public class Cat : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    public SpriteRenderer spriteRendr;
+
+    public Sprite normal;
+    public Sprite caught;
+
     void Start()
     {
         
@@ -14,5 +20,15 @@ public class Cat : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void caughtSprite()
+    {
+        spriteRendr.sprite = caught;
+    }
+
+    void normalSprite()
+    {
+        spriteRendr.sprite = normal;
     }
 }

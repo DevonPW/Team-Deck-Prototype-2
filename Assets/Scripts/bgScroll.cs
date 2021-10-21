@@ -17,7 +17,7 @@ public class bgScroll : MonoBehaviour
         transform.Translate(-speed * Time.deltaTime, 0, 0);
 
         if (transform.position.x <= -19.18) {
-            transform.position = new Vector3(0, 0, 0);
+            transform.position = new Vector3(0, 0);
         }
     }
 }

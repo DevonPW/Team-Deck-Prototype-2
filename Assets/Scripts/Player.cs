@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public bool isHit = false;
+
+    public SpriteRenderer spriteRendr;
+
+    public Sprite normal;
+    public Sprite caught;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +22,15 @@ public class Player : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void caughtSprite()
+    {
+        spriteRendr.sprite = caught;
+    }
+
+    void normalSprite()
+    {
+        spriteRendr.sprite = normal;
     }
 }
